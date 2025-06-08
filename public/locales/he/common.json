@@ -1,0 +1,27 @@
+{
+  "buttons": {
+    "getStarted": "התחל היום",
+    "learnMore": "למד עוד",
+    "viewDetails": "צפה בפרטים",
+    "viewAll": "צפה בהכל",
+    "readMore": "קרא עוד",
+    "sendMessage": "שלח הודעה",
+    "startProject": "התחל את הפרויקט שלך",
+    "viewWork": "צפה בעבודות שלנו",
+    "watchDemo": "צפה בהדגמה"
+  },
+  "navigation": {
+    "home": "בית",
+    "about": "אודות",
+    "services": "שירותים",
+    "portfolio": "תיק עבודות",
+    "pricing": "תמחור",
+    "blog": "בלוג",
+    "contact": "צור קשר"
+  },
+  "client": "לקוח",
+  "status": {
+    "completed": "הושלם",
+    "inProgress": "בתהליך"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "buttons": {
+    "getStarted": "Get Started Today",
+    "learnMore": "Learn More",
+    "viewDetails": "View Details",
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "sendMessage": "Send Message",
+    "startProject": "Start Your Project",
+    "viewWork": "View Our Work",
+    "watchDemo": "Watch Demo"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "pricing": "Pricing",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "client": "Client",
+  "status": {
+    "completed": "Completed",
+    "inProgress": "In Progress"
+  }
+}

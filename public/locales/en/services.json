@@ -1,0 +1,17 @@
+{
+  "automation": {
+    "title": "Process Automation",
+    "description": "Streamline your workflows and eliminate repetitive tasks with intelligent automation solutions.",
+    "features": ["Workflow Design & Implementation", "API Integration & Data Sync", "Real-time Monitoring & Analytics"]
+  },
+  "custom": {
+    "title": "Custom Development",
+    "description": "Tailored software solutions built specifically for your business needs and requirements.",
+    "features": ["Web & Mobile Applications", "Database Design & Optimization", "Cloud Infrastructure Setup"]
+  },
+  "aiAgents": {
+    "title": "AI Agents",
+    "description": "Intelligent AI agents that enhance your operations and provide automated decision-making capabilities.",
+    "features": ["Natural Language Processing", "Machine Learning Models", "Automated Decision Making"]
+  }
+}

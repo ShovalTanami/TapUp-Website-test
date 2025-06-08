@@ -1,0 +1,86 @@
+{
+  "hero": {
+    "badge": "Transform Your Business with AI & Automation",
+    "title": "Intelligent Automation for Modern Business",
+    "description": "We help businesses streamline operations, reduce costs, and boost productivity through cutting-edge automation and AI solutions.",
+    "cta": "Get Started Today",
+    "watchDemo": "Watch Demo"
+  },
+  "stats": {
+    "projects": "Successful Projects",
+    "satisfaction": "Client Satisfaction",
+    "support": "Support Available",
+    "clients": "Happy Clients"
+  },
+  "about": {
+    "badge": "About Us",
+    "title": "Transforming Businesses Through Innovation",
+    "description": "We are a team of passionate technologists dedicated to helping businesses leverage cutting-edge technology to achieve their goals. With years of experience in automation, AI, and custom development, we deliver solutions that drive real results.",
+    "expertTeam": "Expert Team",
+    "expertTeamDesc": "Certified professionals",
+    "provenResults": "Proven Results",
+    "provenResultsDesc": "150+ successful projects"
+  },
+  "services": {
+    "badge": "Our Services",
+    "title": "Comprehensive Solutions",
+    "subtitle": "We offer a full range of services to help your business thrive"
+  },
+  "projects": {
+    "badge": "Recent Projects",
+    "title": "Our Latest Work",
+    "subtitle": "Discover how we've helped businesses transform their operations with innovative solutions"
+  },
+  "technology": {
+    "badge": "Technology Stack",
+    "title": "Built with Modern Technologies",
+    "subtitle": "We use cutting-edge technologies to deliver robust, scalable, and future-proof solutions"
+  },
+  "testimonials": {
+    "badge": "Client Success Stories",
+    "title": "What Our Clients Say",
+    "subtitle": "Don't just take our word for it",
+    "client1": {
+      "name": "Sarah Johnson",
+      "role": "CEO, TechStart",
+      "text": "TapUp transformed our business processes completely. The automation solutions they implemented saved us 40% of our operational time."
+    },
+    "client2": {
+      "name": "Michael Chen",
+      "role": "CTO, DataFlow",
+      "text": "The AI integration they developed increased our productivity by 60%. Professional team with exceptional results."
+    },
+    "client3": {
+      "name": "Emma Rodriguez",
+      "role": "Operations Manager, RetailPlus",
+      "text": "Outstanding work on our custom development project. They delivered exactly what we needed, on time and within budget."
+    }
+  },
+  "blog": {
+    "badge": "Latest Insights",
+    "title": "From Our Blog",
+    "subtitle": "Stay updated with the latest trends and insights in technology and business automation"
+  },
+  "contact": {
+    "badge": "Get In Touch",
+    "title": "Ready to Transform Your Business?",
+    "subtitle": "Let's discuss how we can help you achieve your goals with our innovative solutions",
+    "formTitle": "Let's Start a Conversation",
+    "emailUs": "Email Us",
+    "callUs": "Call Us",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us about your project..."
+  },
+  "cta": {
+    "title": "Ready to Get Started?",
+    "description": "Join hundreds of businesses that have transformed their operations with our innovative solutions",
+    "button": "Start Your Project"
+  },
+  "trusted": "Trusted by 50+ companies",
+  "rating": "rating",
+  "globalReach": "Global Reach"
+}
