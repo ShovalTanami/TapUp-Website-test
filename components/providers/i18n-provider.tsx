@@ -9,7 +9,7 @@ import { I18nextProvider } from "react-i18next"
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Set initial direction based on language
-    const currentLang = i18n.language || "en"
+    const currentLang = i18n.language || "he" // Change from "en" to "he"
     document.documentElement.dir = currentLang === "he" ? "rtl" : "ltr"
     document.documentElement.lang = currentLang
   }, [])

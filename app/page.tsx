@@ -30,7 +30,7 @@ import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { AnimatedCounter } from "@/components/ui/animated-counter"
 import { FloatingIcons } from "@/components/ui/floating-icons"
-import { TechStack } from "@/components/ui/tech-stack"
+import { AnimatedTechColumns } from "@/components/ui/animated-tech-columns"
 import { ParticleBackground } from "@/components/ui/particle-background"
 import { GlowEffect } from "@/components/ui/glow-effect"
 import { AutomationIntegrations } from "@/components/ui/automation-integrations"
@@ -42,6 +42,9 @@ import {
   TextReveal,
   ScrollProgress,
 } from "@/components/ui/scroll-animations"
+
+// Import the new ServicesGrid component at the top
+import { ServicesGrid } from "@/components/ui/services-grid"
 
 export default function HomePage() {
   const { t, i18n } = useTranslation()
@@ -197,38 +200,39 @@ export default function HomePage() {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-5xl mx-auto text-center">
             <FadeIn delay={0.2}>
               <div className="badge-style mb-8">
-                <Zap className="w-4 h-4 mr-2" />
-                {t("home:hero.badge")}
+                <Zap className="w-4 h-4 ml-2" />
+                {t("home:hero.badge") || "פתרונות טכנולוגיים מתקדמים"}
               </div>
             </FadeIn>
 
             <TextReveal delay={0.4}>
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-                <span className="text-gradient">{t("home:hero.title")}</span>
+                <span className="text-gradient">{t("home:hero.title") || "פתרונות טכנולוגיים מתקדמים לעסק שלכם"}</span>
               </h1>
             </TextReveal>
 
             <FadeIn delay={0.6}>
-              <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w2xl mx-auto">
-                {t("home:hero.description")}
+              <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
+                {t("home:hero.description") ||
+                  "אנחנו מתמחים בפיתוח פתרונות טכנולוגיים מותאמים אישית, אוטומציה עסקית ובינה מלאכותית שיעזרו לעסק שלכם לצמוח ולהתפתח"}
               </p>
             </FadeIn>
 
             <FadeIn delay={0.8}>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
                 <Link href="/contact">
                   <Button className="btn-primary group">
-                    {t("common:buttons.getStarted")}
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    {t("common:buttons.getStarted") || "בואו נתחיל"}
+                    <ArrowRight className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform rotate-180" />
                   </Button>
                 </Link>
 
                 <Button variant="outline" className="btn-secondary group">
-                  <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                  {t("common:buttons.watchDemo")}
+                  <Play className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                  {t("common:buttons.watchDemo") || "צפו בהדגמה"}
                 </Button>
               </div>
             </FadeIn>
@@ -237,16 +241,16 @@ export default function HomePage() {
             <FadeIn delay={1.0}>
               <div className="flex flex-wrap items-center justify-center gap-8 text-muted-foreground mb-16">
                 <div className="flex items-center">
-                  <CheckCircle className="w-5 h-5 mr-2 text-green-500" />
-                  <span className="text-sm">{t("home:trusted")}</span>
+                  <CheckCircle className="w-5 h-5 ml-2 text-green-500" />
+                  <span className="text-sm">{t("home:trusted") || "מהימן על ידי מאות עסקים"}</span>
                 </div>
                 <div className="flex items-center">
-                  <Star className="w-5 h-5 mr-1 text-yellow-400 fill-current" />
-                  <span className="text-sm">4.9/5 {t("home:rating")}</span>
+                  <Star className="w-5 h-5 ml-1 text-yellow-400 fill-current" />
+                  <span className="text-sm">4.9/5 {t("home:rating") || "דירוג"}</span>
                 </div>
                 <div className="flex items-center">
-                  <Globe className="w-5 h-5 mr-2 text-blue-500" />
-                  <span className="text-sm">{t("home:globalReach")}</span>
+                  <Globe className="w-5 h-5 ml-2 text-blue-500" />
+                  <span className="text-sm">{t("home:globalReach") || "פתרונות גלובליים"}</span>
                 </div>
               </div>
             </FadeIn>
@@ -368,53 +372,25 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(120,50,255,0.1),transparent_50%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(120,50,255,0.2),transparent_50%)]" />
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 max-w-4xl mx-auto">
             <FadeIn>
               <div className="badge-style mb-6">
-                <Settings className="w-4 h-4 mr-2" />
-                {t("home:services.badge")}
+                <Settings className="w-4 h-4 ml-2" />
+                {t("home:services.badge") || "השירותים שלנו"}
               </div>
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">{t("home:services.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">{t("home:services.subtitle")}</p>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                {t("home:services.title") || "פתרונות מתקדמים לכל צורך"}
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                {t("home:services.subtitle") ||
+                  "אנחנו מציעים מגוון רחב של שירותים טכנולוגיים מתקדמים שיעזרו לעסק שלכם להגיע ליעדים"}
+              </p>
             </FadeIn>
           </div>
 
-          <StaggerContainer>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {services.map((service, index) => (
-                <StaggerItem key={index}>
-                  <Link href={service.href}>
-                    <GlowEffect>
-                      <Card className="card-hover h-full overflow-hidden group">
-                        <CardContent className="p-8">
-                          <div className="mb-6 p-4 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-2xl inline-block group-hover:scale-110 transition-transform duration-300">
-                            {service.icon}
-                          </div>
-                          <h3 className="text-xl font-bold mb-3 group-hover:text-purple-600 transition-colors">
-                            {service.title}
-                          </h3>
-                          <p className="text-muted-foreground mb-6">{service.description}</p>
-                          <ul className="space-y-3 mb-6">
-                            {Array.isArray(service.features) &&
-                              service.features.map((feature, i) => (
-                                <li key={i} className="flex items-center gap-3">
-                                  <CheckCircle className="h-4 w-4 text-purple-500 flex-shrink-0" />
-                                  <span className="text-sm text-muted-foreground">{feature}</span>
-                                </li>
-                              ))}
-                          </ul>
-                          <div className="flex items-center text-purple-600 font-medium group-hover:gap-3 gap-2 transition-all duration-300">
-                            {t("common:buttons.learnMore")}
-                            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </GlowEffect>
-                  </Link>
-                </StaggerItem>
-              ))}
-            </div>
-          </StaggerContainer>
+          <FadeIn delay={0.3}>
+            <ServicesGrid />
+          </FadeIn>
         </div>
       </section>
 
@@ -506,7 +482,7 @@ export default function HomePage() {
           </FadeIn>
 
           <FadeIn>
-            <TechStack />
+            <AnimatedTechColumns />
           </FadeIn>
         </div>
       </section>

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "TapUp - Smart Technology Solutions",
   description:
     "TapUp provides smart technological solutions for businesses including automation, custom systems, and AI integration.",
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="he" suppressHydrationWarning>
       <body className={heebo.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange={false}>
           <I18nProvider>

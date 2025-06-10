@@ -25,6 +25,13 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // הוספת קוד להגדרת כיוון האתר בטעינה ראשונית
+  useEffect(() => {
+    // קביעת כיוון האתר בהתאם לשפה הנוכחית
+    document.documentElement.dir = i18n.language === "he" ? "rtl" : "ltr"
+    document.documentElement.lang = i18n.language
+  }, [i18n.language])
+
   const navigation = [
     { name: t("nav.home"), href: "/" },
     {
