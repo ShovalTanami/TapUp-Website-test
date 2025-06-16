@@ -1,9 +1,8 @@
 "use client"
 
-import { useTranslation } from "react-i18next"
 import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Target, Heart, Lightbulb, Users, Award, Shield, Rocket, ArrowRight } from "lucide-react"
+import { BaseButton } from "@/components/ui/base-button"
+import { Target, Heart, Lightbulb, Users, Award, Shield, Rocket, ArrowLeft } from "lucide-react"
 import { GlowEffect } from "@/components/ui/glow-effect"
 import { AnimatedCounter } from "@/components/ui/animated-counter"
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/scroll-animations"
@@ -11,9 +10,6 @@ import { ParticleBackground } from "@/components/ui/particle-background"
 import Link from "next/link"
 
 export default function AboutPage() {
-  const { t, i18n } = useTranslation()
-  const isRTL = i18n.language === "he"
-
   const values = [
     { icon: Target, key: "excellence", color: "text-purple-600", bgColor: "bg-purple-100 dark:bg-purple-900/30" },
     { icon: Heart, key: "passion", color: "text-blue-600", bgColor: "bg-blue-100 dark:bg-blue-900/30" },
@@ -22,39 +18,54 @@ export default function AboutPage() {
   ]
 
   const achievements = [
-    { icon: Award, number: 150, suffix: "+", label: isRTL ? "פרויקטים מוצלחים" : "Successful Projects" },
-    { icon: Users, number: 50, suffix: "+", label: isRTL ? "לקוחות מרוצים" : "Happy Clients" },
-    { icon: Shield, number: 99, suffix: "%", label: isRTL ? "שביעות רצון לקוחות" : "Client Satisfaction" },
-    { icon: Rocket, number: 5, suffix: "+", label: isRTL ? "שנות ניסיון" : "Years Experience" },
+    { icon: Award, number: 150, suffix: "+", label: "פרויקטים מוצלחים" },
+    { icon: Users, number: 50, suffix: "+", label: "לקוחות מרוצים" },
+    { icon: Shield, number: 99, suffix: "%", label: "שביעות רצון לקוחות" },
+    { icon: Rocket, number: 5, suffix: "+", label: "שנות ניסיון" },
   ]
 
   const team = [
     {
-      name: "David Cohen",
-      role: isRTL ? 'מנכ"ל ומייסד' : "CEO & Founder",
+      name: "דוד כהן",
+      role: 'מנכ"ל ומייסד',
       image: "https://avatar.vercel.sh/david",
-      description: isRTL
-        ? "מנהיג חזון עם 10+ שנות ניסיון בחדשנות טכנולוגית"
-        : "Visionary leader with 10+ years in tech innovation",
+      description: "מנהיג חזון עם 10+ שנות ניסיון בחדשנות טכנולוגית",
     },
     {
-      name: "Sarah Levi",
-      role: isRTL ? "מנהלת טכנולוגיות" : "CTO",
+      name: "שרה לוי",
+      role: "מנהלת טכנולוגיות",
       image: "https://avatar.vercel.sh/sarah-levi",
-      description: isRTL ? "מומחית בטכנולוגיות בינה מלאכותית ואוטומציה" : "Expert in AI and automation technologies",
+      description: "מומחית בטכנולוגיות בינה מלאכותית ואוטומציה",
     },
     {
-      name: "Michael Ben-David",
-      role: isRTL ? "מפתח ראשי" : "Lead Developer",
+      name: "מיכאל בן-דוד",
+      role: "מפתח ראשי",
       image: "https://avatar.vercel.sh/michael-ben",
-      description: isRTL
-        ? "מפתח full-stack המתמחה בפתרונות מדרגיים"
-        : "Full-stack developer specializing in scalable solutions",
+      description: "מפתח full-stack המתמחה בפתרונות מדרגיים",
+    },
+  ]
+
+  const valuesData = [
+    {
+      title: "מצוינות",
+      description: "אנחנו שואפים למצוינות בכל מה שאנחנו עושים, מהפיתוח ועד השירות ללקוח",
+    },
+    {
+      title: "תשוקה",
+      description: "התשוקה שלנו לטכנולוגיה ולחדשנות מניעה אותנו ליצור פתרונות מדהימים",
+    },
+    {
+      title: "חדשנות",
+      description: "אנחנו תמיד מחפשים דרכים חדשות ויצירתיות לפתור אתגרים טכנולוגיים",
+    },
+    {
+      title: "שותפות",
+      description: "אנחנו רואים בלקוחות שלנו שותפים ועובדים יחד להשגת המטרות המשותפות",
     },
   ]
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground" dir="rtl">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <ParticleBackground />
@@ -65,21 +76,23 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto text-center">
             <FadeIn>
               <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-full text-purple-600 dark:text-purple-300 text-sm font-medium mb-8 backdrop-blur-sm">
-                <Users className="w-4 h-4 mr-2" />
-                {t("about.title")}
+                <Users className="w-4 h-4 ml-2" />
+                אודותינו
               </div>
             </FadeIn>
 
             <FadeIn delay={0.2}>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-foreground via-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  {t("about.title")}
+                  הסיפור שלנו
                 </span>
               </h1>
             </FadeIn>
 
             <FadeIn delay={0.4}>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">{t("about.subtitle")}</p>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+                אנחנו TapUp - חברת טכנולוגיה ישראלית המתמחה בפתרונות אוטומציה ובינה מלאכותית מתקדמים
+              </p>
             </FadeIn>
           </div>
         </div>
@@ -89,16 +102,25 @@ export default function AboutPage() {
       <section className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <FadeIn direction="left">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">{t("about.story.title")}</h2>
+            <FadeIn direction="right">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">המסע שלנו</h2>
               <div className="space-y-6 text-muted-foreground leading-relaxed">
-                <p className="text-lg">{t("about.story.paragraph1")}</p>
-                <p className="text-lg">{t("about.story.paragraph2")}</p>
-                <p className="text-lg">{t("about.story.paragraph3")}</p>
+                <p className="text-lg">
+                  TapUp נוסדה מתוך חזון ברור: להפוך טכנולוגיה מתקדמת לנגישה ופרקטית עבור עסקים בכל הגדלים. אנחנו מאמינים
+                  שכל עסק ראוי לטכנולוגיה שמניעה אותו קדימה.
+                </p>
+                <p className="text-lg">
+                  הצוות שלנו מורכב ממפתחים מנוסים, מהנדסי AI ויועצי טכנולוגיה שמביאים ניסיון רב שנים מהתעשייה הישראלית
+                  והבינלאומית. אנחנו מתמחים בפתרונות אוטומציה, בינה מלאכותית ופיתוח מותאם אישית.
+                </p>
+                <p className="text-lg">
+                  המטרה שלנו היא לעזור לעסקים לחסוך זמן, להגדיל יעילות ולהשיג תוצאות מדידות באמצעות טכנולוגיה חכמה
+                  ומותאמת אישית.
+                </p>
               </div>
             </FadeIn>
 
-            <FadeIn direction="right">
+            <FadeIn direction="left">
               <GlowEffect>
                 <div className="relative">
                   <img
@@ -121,13 +143,9 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 relative z-10">
           <FadeIn>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-                {isRTL ? "ההישגים שלנו" : "Our Achievements"}
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">ההישגים שלנו</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                {isRTL
-                  ? "מספרים המשקפים את המחויבות שלנו למצוינות והצלחת לקוחות"
-                  : "Numbers that reflect our commitment to excellence and client success"}
+                מספרים המשקפים את המחויבות שלנו למצוינות והצלחת לקוחות
               </p>
             </div>
           </FadeIn>
@@ -162,12 +180,8 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <FadeIn>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">{t("about.values.title")}</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                {isRTL
-                  ? "העקרונות הבסיסיים המנחים את כל מה שאנחנו עושים"
-                  : "The core principles that guide everything we do"}
-              </p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">הערכים שלנו</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">העקרונות הבסיסיים המנחים את כל מה שאנחנו עושים</p>
             </div>
           </FadeIn>
 
@@ -185,10 +199,8 @@ export default function AboutPage() {
                           >
                             <Icon className={`h-8 w-8 ${value.color}`} />
                           </div>
-                          <h3 className="text-xl font-semibold mb-3 text-foreground">
-                            {t(`about.values.items.${value.key}.title`)}
-                          </h3>
-                          <p className="text-muted-foreground">{t(`about.values.items.${value.key}.description`)}</p>
+                          <h3 className="text-xl font-semibold mb-3 text-foreground">{valuesData[index].title}</h3>
+                          <p className="text-muted-foreground">{valuesData[index].description}</p>
                         </CardContent>
                       </Card>
                     </GlowEffect>
@@ -207,14 +219,8 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 relative z-10">
           <FadeIn>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-                {isRTL ? "הכירו את הצוות שלנו" : "Meet Our Team"}
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                {isRTL
-                  ? "האנשי המקצוע הנלהבים מאחורי הצלחת TapUp"
-                  : "The passionate professionals behind TapUp's success"}
-              </p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">הכירו את הצוות שלנו</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">האנשי המקצוע הנלהבים מאחורי הצלחת TapUp</p>
             </div>
           </FadeIn>
 
@@ -249,8 +255,11 @@ export default function AboutPage() {
           <FadeIn>
             <GlowEffect>
               <div className="bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-700 dark:to-blue-700 text-white rounded-3xl p-12 text-center shadow-2xl">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">{t("about.vision.title")}</h2>
-                <p className="text-xl opacity-90 max-w-3xl mx-auto leading-relaxed">{t("about.vision.description")}</p>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">החזון שלנו</h2>
+                <p className="text-xl opacity-90 max-w-3xl mx-auto leading-relaxed">
+                  להיות החברה המובילה בישראל בתחום פתרונות האוטומציה והבינה המלאכותית, ולעזור לעסקים להשיג את המטרות
+                  שלהם באמצעות טכנולוגיה חכמה ומותאמת אישית.
+                </p>
               </div>
             </GlowEffect>
           </FadeIn>
@@ -262,28 +271,21 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <FadeIn>
             <div className="text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
-                {isRTL ? "מוכן לעבוד איתנו?" : "Ready to Work with Us?"}
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">מוכן לעבוד איתנו?</h2>
               <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-lg">
-                {isRTL
-                  ? "בוא נדבר על איך אנחנו יכולים לעזור לשנות את העסק שלך עם פתרונות טכנולוגיים חדשניים."
-                  : "Let's discuss how we can help transform your business with innovative technology solutions."}
+                בוא נדבר על איך אנחנו יכולים לעזור לשנות את העסק שלך עם פתרונות טכנולוגיים חדשניים.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">
-                  <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-8 py-6 text-lg rounded-full group">
-                    {isRTL ? "התחל היום" : "Get Started Today"}
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <BaseButton variant="primary" size="lg" className="group">
+                    התחל היום
+                    <ArrowLeft className="mr-2 h-5 w-5 group-hover:-translate-x-1 transition-transform" />
+                  </BaseButton>
                 </Link>
                 <Link href="/services">
-                  <Button
-                    variant="outline"
-                    className="border-purple-500 text-purple-500 hover:bg-purple-500/10 px-8 py-6 text-lg rounded-full"
-                  >
-                    {isRTL ? "השירותים שלנו" : "Our Services"}
-                  </Button>
+                  <BaseButton variant="secondary" size="lg">
+                    השירותים שלנו
+                  </BaseButton>
                 </Link>
               </div>
             </div>

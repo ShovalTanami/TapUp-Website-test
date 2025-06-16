@@ -27,8 +27,8 @@ export function GlowEffect({
   const [opacity, setOpacity] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [effectiveGlowSize, setEffectiveGlowSize] = useState(glowSize)
 
-  // Check for dark mode
   useEffect(() => {
     const isDark = document.documentElement.classList.contains("dark")
     setIsDarkMode(isDark)
@@ -46,7 +46,23 @@ export function GlowEffect({
     return () => observer.disconnect()
   }, [])
 
-  // Skip effect if disabled
+  useEffect(() => {
+    const updateGlowSize = () => {
+      if (containerRef.current) {
+        const { clientWidth, clientHeight } = containerRef.current
+        // Calculate a responsive glow size based on the smaller dimension of the container
+        // Clamp it between a minimum (e.g., 100px) and the provided glowSize prop (as max)
+        const calculatedSize = Math.min(clientWidth, clientHeight) * 0.8 // 80% of the smaller dimension
+        setEffectiveGlowSize(Math.max(100, Math.min(glowSize, calculatedSize)))
+      }
+    }
+
+    updateGlowSize() // Set initial size
+    window.addEventListener("resize", updateGlowSize) // Update on resize
+
+    return () => window.removeEventListener("resize", updateGlowSize)
+  }, [glowSize])
+
   if (disabled) {
     return <div className={className}>{children}</div>
   }
@@ -83,7 +99,7 @@ export function GlowEffect({
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-[inherit] opacity-0"
         style={{
-          background: `radial-gradient(${glowSize}px circle at ${position.x}px ${position.y}px, ${isDarkMode ? darkGlowColor : glowColor}, transparent)`,
+          background: `radial-gradient(${effectiveGlowSize}px circle at ${position.x}px ${position.y}px, ${isDarkMode ? darkGlowColor : glowColor}, transparent)`,
           opacity: isHovered ? glowOpacity : 0,
         }}
         animate={{ opacity }}

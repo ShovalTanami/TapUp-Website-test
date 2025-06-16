@@ -2,22 +2,27 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { useTranslation } from "react-i18next"
 import { Mail, Calendar, MessageSquare, FileText, Users, BarChart3, Cloud, Webhook, Bot } from "lucide-react"
 
 export function AutomationIntegrations() {
-  const { t } = useTranslation()
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
   const [containerSize, setContainerSize] = useState({ width: 600, height: 600 })
 
   useEffect(() => {
     const updateSize = () => {
       const width = window.innerWidth
-      if (width < 640) {
-        setContainerSize({ width: 400, height: 400 })
+      // Adjust container size based on viewport width
+      if (width < 480) {
+        // Very small screens
+        setContainerSize({ width: 320, height: 320 })
+      } else if (width < 640) {
+        // Small screens (mobile)
+        setContainerSize({ width: 380, height: 380 })
       } else if (width < 1024) {
+        // Medium screens (tablet)
         setContainerSize({ width: 500, height: 500 })
       } else {
+        // Large screens (desktop)
         setContainerSize({ width: 600, height: 600 })
       }
     }
@@ -30,74 +35,83 @@ export function AutomationIntegrations() {
   const integrations = [
     {
       id: "email",
-      name: "Email Integration",
-      description: "Connect with email platforms like Gmail, Outlook, and more",
+      name: "אינטגרציית אימייל",
+      description: "התחברות לפלטפורמות אימייל כמו Gmail, Outlook ועוד",
       icon: Mail,
       color: "text-blue-500",
       bgColor: "bg-blue-500/10",
     },
     {
       id: "calendar",
-      name: "Calendar Sync",
-      description: "Integrate with Google Calendar, Outlook Calendar, and scheduling tools",
+      name: "סנכרון יומן",
+      description: "אינטגרציה עם Google Calendar, Outlook Calendar וכלי תזמון",
       icon: Calendar,
       color: "text-green-500",
       bgColor: "bg-green-500/10",
     },
     {
       id: "chat",
-      name: "Chat Platforms",
-      description: "Connect with Slack, Teams, Discord, and messaging apps",
+      name: "פלטפורמות צ'אט",
+      description: "התחברות ל-Slack, Teams, Discord ואפליקציות הודעות",
       icon: MessageSquare,
       color: "text-purple-500",
       bgColor: "bg-purple-500/10",
     },
     {
       id: "documents",
-      name: "Document Management",
-      description: "Integrate with Google Drive, Dropbox, SharePoint, and file systems",
+      name: "ניהול מסמכים",
+      description: "אינטגרציה עם Google Drive, Dropbox, SharePoint ומערכות קבצים",
       icon: FileText,
       color: "text-orange-500",
       bgColor: "bg-orange-500/10",
     },
     {
       id: "crm",
-      name: "CRM Systems",
-      description: "Connect with Salesforce, HubSpot, Pipedrive, and customer management tools",
+      name: "מערכות CRM",
+      description: "התחברות ל-Salesforce, HubSpot, Pipedrive וכלי ניהול לקוחות",
       icon: Users,
       color: "text-pink-500",
       bgColor: "bg-pink-500/10",
     },
     {
       id: "analytics",
-      name: "Analytics Tools",
-      description: "Integrate with Google Analytics, Mixpanel, and business intelligence platforms",
+      name: "כלי אנליטיקה",
+      description: "אינטגרציה עם Google Analytics, Mixpanel ופלטפורמות BI",
       icon: BarChart3,
       color: "text-indigo-500",
       bgColor: "bg-indigo-500/10",
     },
     {
       id: "cloud",
-      name: "Cloud Services",
-      description: "Connect with AWS, Azure, Google Cloud, and cloud infrastructure",
+      name: "שירותי ענן",
+      description: "התחברות ל-AWS, Azure, Google Cloud ותשתיות ענן",
       icon: Cloud,
       color: "text-cyan-500",
       bgColor: "bg-cyan-500/10",
     },
     {
       id: "webhooks",
-      name: "Webhooks & APIs",
-      description: "Custom integrations with REST APIs, GraphQL, and webhook endpoints",
+      name: "Webhooks ו-APIs",
+      description: "אינטגרציות מותאמות עם REST APIs, GraphQL ונקודות webhook",
       icon: Webhook,
       color: "text-yellow-500",
       bgColor: "bg-yellow-500/10",
     },
   ]
 
-  // Calculate responsive radius based on container size
-  const radius = Math.min(containerSize.width, containerSize.height) * 0.28
+  // Increased radius factor for mobile to spread out icons more
+  const baseRadiusFactor = containerSize.width < 640 ? 0.48 : 0.28
+  const radius = Math.min(containerSize.width, containerSize.height) * baseRadiusFactor
   const centerX = containerSize.width / 2
   const centerY = containerSize.height / 2
+
+  // Determine icon size based on container width
+  const iconSize = containerSize.width < 640 ? 72 : 80 // Slightly larger for mobile
+  const iconOffset = iconSize / 2
+
+  // Determine central element size based on container width
+  const centralElementSize = containerSize.width < 640 ? 100 : 128
+  const centralElementOffset = centralElementSize / 2
 
   return (
     <div
@@ -108,7 +122,6 @@ export function AutomationIntegrations() {
         minHeight: "400px",
       }}
     >
-      {/* Orbital rings - positioned to match the icon circle */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <motion.div
           className="border border-purple-500/20 rounded-full"
@@ -130,14 +143,13 @@ export function AutomationIntegrations() {
         />
       </div>
 
-      {/* Central hub */}
       <motion.div
         className="absolute bg-gradient-to-br from-purple-600 to-blue-600 rounded-3xl flex items-center justify-center shadow-2xl z-10"
         style={{
-          width: containerSize.width < 640 ? 96 : 128,
-          height: containerSize.width < 640 ? 96 : 128,
-          left: centerX - (containerSize.width < 640 ? 48 : 64),
-          top: centerY - (containerSize.width < 640 ? 48 : 64),
+          width: centralElementSize,
+          height: centralElementSize,
+          left: centerX - centralElementOffset,
+          top: centerY - centralElementOffset,
         }}
         whileHover={{ scale: 1.1 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -148,126 +160,103 @@ export function AutomationIntegrations() {
         <div className="absolute inset-0 bg-gradient-to-br from-purple-600/50 to-blue-600/50 rounded-3xl animate-pulse" />
       </motion.div>
 
-      {/* Central label */}
       <div
         className="absolute text-center z-20"
         style={{
           left: centerX,
-          top: centerY + (containerSize.width < 640 ? 70 : 90),
+          top: centerY + (centralElementOffset + 20), // Adjusted offset for text below central element
           transform: "translateX(-50%)",
         }}
       >
-        <h3 className={`font-semibold text-foreground ${containerSize.width < 640 ? "text-base" : "text-lg"}`}>
-          Automation Hub
-        </h3>
-        <p className={`text-muted-foreground ${containerSize.width < 640 ? "text-xs" : "text-sm"}`}>
-          Connect all your tools
-        </p>
+        <div className="text-lg md:text-xl font-bold text-foreground">TapUp</div>
+        <div className="text-xs md:text-sm text-muted-foreground">אוטומציה חכמה</div>
       </div>
 
-      {/* Integration nodes */}
       {integrations.map((integration, index) => {
+        const angle = (index * (2 * Math.PI)) / integrations.length
+        const x = centerX + radius * Math.cos(angle)
+        const y = centerY + radius * Math.sin(angle)
         const Icon = integration.icon
-        const isHovered = hoveredNode === integration.id
 
-        // Perfect circle calculation
-        const angleStep = (2 * Math.PI) / integrations.length
-        const angle = index * angleStep - Math.PI / 2 // Start from top
-
-        // Calculate exact position
-        const x = centerX + Math.cos(angle) * radius
-        const y = centerY + Math.sin(angle) * radius
-
-        const nodeSize = containerSize.width < 640 ? 64 : 80
+        // Determine if the icon is in the bottom half of the container
+        const isBottomHalf = y > centerY
 
         return (
           <motion.div
             key={integration.id}
-            className="absolute z-20"
+            className={`absolute ${integration.bgColor} backdrop-blur-sm border border-white/10 rounded-2xl shadow-lg flex flex-col items-center justify-center cursor-pointer z-10`}
             style={{
-              left: x - nodeSize / 2,
-              top: y - nodeSize / 2,
-              width: nodeSize,
-              height: nodeSize,
+              width: iconSize,
+              height: iconSize,
+              left: x - iconOffset,
+              top: y - iconOffset,
             }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{
-              type: "spring",
-              stiffness: 260,
-              damping: 20,
-              delay: index * 0.1,
-            }}
-            whileHover={{ scale: 1.2, zIndex: 30 }}
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
             onHoverStart={() => setHoveredNode(integration.id)}
             onHoverEnd={() => setHoveredNode(null)}
           >
-            {/* Connection line */}
-            <motion.div
-              className="absolute bg-gradient-to-r from-purple-500/30 to-transparent z-10"
-              style={{
-                width: radius,
-                height: 2,
-                left: nodeSize / 2,
-                top: nodeSize / 2 - 1,
-                transformOrigin: "0 50%",
-                transform: `rotate(${angle + Math.PI}rad)`,
-              }}
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 0.5 + index * 0.1, duration: 0.8 }}
-            />
+            <Icon className={`w-6 h-6 ${integration.color}`} />
+            <span className="text-xs font-medium mt-1 text-center">{integration.name}</span>
 
-            {/* Node */}
-            <motion.div
-              className={`w-full h-full ${integration.bgColor} backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg border border-border/50 cursor-pointer group relative z-20`}
-              whileHover={{
-                boxShadow: "0 20px 40px rgba(139, 92, 246, 0.3)",
-                borderColor: "rgba(139, 92, 246, 0.5)",
-              }}
-            >
-              <Icon
-                className={`${containerSize.width < 640 ? "w-6 h-6" : "w-8 h-8"} ${integration.color} group-hover:scale-110 transition-transform`}
-              />
-            </motion.div>
-
-            {/* Smart tooltip positioning */}
-            {isHovered && (
+            {hoveredNode === integration.id && (
               <motion.div
-                className="absolute bg-card/95 backdrop-blur-sm border border-border/50 rounded-lg p-3 shadow-xl z-50 min-w-[200px] max-w-[250px]"
+                className={`absolute bg-white dark:bg-gray-800 rounded-lg shadow-lg p-3 text-sm w-48 z-50 text-center`}
                 style={{
-                  left: x > centerX ? -210 : nodeSize + 10,
-                  top: y < centerY ? nodeSize + 10 : -80,
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  // Position tooltip above if in bottom half, otherwise below
+                  [isBottomHalf ? "bottom" : "top"]: "100%",
+                  [isBottomHalf ? "marginBottom" : "marginTop"]: "8px", // Add some margin
                 }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.2 }}
+                initial={{ opacity: 0, y: isBottomHalf ? 5 : -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: isBottomHalf ? 5 : -5 }}
               >
-                <h4 className="font-semibold text-foreground mb-1 text-sm">{integration.name}</h4>
-                <p className="text-xs text-muted-foreground">{integration.description}</p>
+                <p className="text-foreground max-w-[180px] mx-auto">{integration.description}</p>
               </motion.div>
             )}
+          </motion.div>
+        )
+      })}
 
-            {/* Floating particles */}
-            <motion.div
-              className={`absolute w-2 h-2 ${integration.color.replace("text-", "bg-")} rounded-full z-10`}
-              style={{
-                left: nodeSize / 2 - 4,
-                top: nodeSize / 2 - 4,
-              }}
-              animate={{
-                x: [0, 15, -15, 0],
-                y: [0, -15, 15, 0],
-                opacity: [0.3, 1, 0.3],
-              }}
-              transition={{
-                duration: 4,
-                delay: index * 0.5,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-              }}
-            />
+      {integrations.map((integration, index) => {
+        const angle = (index * (2 * Math.PI)) / integrations.length
+        const x = centerX + radius * Math.cos(angle)
+        const y = centerY + radius * Math.sin(angle)
+
+        return (
+          <motion.div
+            key={`line-${integration.id}`}
+            className="absolute left-0 top-0 pointer-events-none"
+            style={{
+              width: containerSize.width,
+              height: containerSize.height,
+            }}
+          >
+            <svg width="100%" height="100%" className="absolute left-0 top-0">
+              <motion.line
+                x1={centerX}
+                y1={centerY}
+                x2={x}
+                y2={y}
+                stroke={`url(#gradient-${integration.id})`}
+                strokeWidth={hoveredNode === integration.id ? 2 : 1}
+                strokeDasharray={hoveredNode === integration.id ? "0" : "4 4"}
+                initial={{ pathLength: 0, opacity: 0.3 }}
+                animate={{
+                  pathLength: hoveredNode === integration.id ? [0, 1, 1] : 1,
+                  opacity: hoveredNode === integration.id ? 1 : 0.3,
+                }}
+                transition={{ duration: hoveredNode === integration.id ? 0.5 : 0 }}
+              />
+              <defs>
+                <linearGradient id={`gradient-${integration.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#8b5cf6" />
+                  <stop offset="100%" stopColor="#3b82f6" />
+                </linearGradient>
+              </defs>
+            </svg>
           </motion.div>
         )
       })}
