@@ -50,17 +50,34 @@ export function GlowEffect({
     const updateGlowSize = () => {
       if (containerRef.current) {
         const { clientWidth, clientHeight } = containerRef.current
-        // Calculate a responsive glow size based on the smaller dimension of the container
-        // Clamp it between a minimum (e.g., 100px) and the provided glowSize prop (as max)
-        const calculatedSize = Math.min(clientWidth, clientHeight) * 0.8 // 80% of the smaller dimension
-        setEffectiveGlowSize(Math.max(100, Math.min(glowSize, calculatedSize)))
+        // More responsive calculation based on viewport and container size
+        const viewportWidth = window.innerWidth
+        const baseSize = Math.min(clientWidth, clientHeight)
+
+        let calculatedSize
+        if (viewportWidth < 640) {
+          // mobile
+          calculatedSize = baseSize * 0.6
+        } else if (viewportWidth < 1024) {
+          // tablet
+          calculatedSize = baseSize * 0.7
+        } else {
+          // desktop
+          calculatedSize = baseSize * 0.8
+        }
+
+        setEffectiveGlowSize(Math.max(80, Math.min(glowSize, calculatedSize)))
       }
     }
 
-    updateGlowSize() // Set initial size
-    window.addEventListener("resize", updateGlowSize) // Update on resize
+    updateGlowSize()
+    window.addEventListener("resize", updateGlowSize)
+    window.addEventListener("orientationchange", updateGlowSize)
 
-    return () => window.removeEventListener("resize", updateGlowSize)
+    return () => {
+      window.removeEventListener("resize", updateGlowSize)
+      window.removeEventListener("orientationchange", updateGlowSize)
+    }
   }, [glowSize])
 
   if (disabled) {
@@ -92,20 +109,26 @@ export function GlowEffect({
     <div
       ref={containerRef}
       className={`relative overflow-hidden ${className}`}
+      style={{
+        width: "100%",
+        height: "100%",
+        minHeight: "fit-content",
+      }}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <motion.div
-        className="pointer-events-none absolute -inset-px rounded-[inherit] opacity-0"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0"
         style={{
           background: `radial-gradient(${effectiveGlowSize}px circle at ${position.x}px ${position.y}px, ${isDarkMode ? darkGlowColor : glowColor}, transparent)`,
           opacity: isHovered ? glowOpacity : 0,
+          transform: "translate3d(0, 0, 0)", // Hardware acceleration
         }}
         animate={{ opacity }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
       />
-      {children}
+      <div className="relative z-10 w-full h-full">{children}</div>
     </div>
   )
 }
